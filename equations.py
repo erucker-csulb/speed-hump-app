@@ -1,5 +1,4 @@
-lan_cell = 6267123295
-fields = ['BJ', 'BM', 'BW', 'BY', 'CR']
+excel_fields = ['BJ', 'BM', 'BW', 'BY', 'CR']
 
 def acc_hist_flag(ten_year, five_year, three_year):
     if ten_year > 6:

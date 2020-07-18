@@ -41,14 +41,20 @@ def calc_sf_points(special_facilities, width_factor):
     osf_points = 18 if special_facilities[3] else 0
     return sr_points + br_points + park_points + osf_points
 
-def rank_score(speed_limit, speed_calc, adt_calc, ksi, five_year, swcd_factor, da, sf_points):
+def rank_score(speed_limit, speed_calc, adt_calc, ksi, three_year, five_year, swcd_factor, da, sf_points):
     sl_check = 1 if speed_limit <= 30 else 0
     speed_check = 1 if speed_calc - speed_limit > 5 else 0
     adt_check = 1 if adt_calc - 1000 > 0 else 0
     speed_points = min(40, (speed_calc - speed_limit - 5) * 3) if speed_check else 0
+    print("CK: ", speed_points)
     adt_points = min(20, (adt_calc - 1000) / 400) if adt_check and adt_check > 0 else 0
-    acc_points = 20 if ksi > 0 else min(20, five_year * 10)
+    print("CL: ", adt_points)
+    ksi_factor = 20 if ksi > 0 else min(20, five_year * 10)
+    three_year_check = min(20, three_year * 7)
+    acc_points = min(20, ksi_factor + three_year_check)
+    print("CM: ", acc_points)
     swcd_points = swcd_factor * 10
     da_points = 30 if da else sf_points
+    print("CO: ", da_points)
     tot_other = acc_points + swcd_points + da_points
     return sl_check * speed_check * adt_check * (speed_points + adt_points + tot_other)

@@ -23,7 +23,7 @@ def calc_speed(ne_speed_1, sw_speed_1, ne_speed_2, sw_speed_2):
         if ne_speed_2:
             return (ne_speed_1 + sw_speed_1 + ne_speed_2 + sw_speed_2) / 4
         return (ne_speed_1 + sw_speed_1) / 2
-    return -1 
+    return 0 
 
 def calc_adt(ne_adt_1, sw_adt_1, ne_adt_2, sw_adt_2):
     if ne_adt_1:
@@ -32,7 +32,7 @@ def calc_adt(ne_adt_1, sw_adt_1, ne_adt_2, sw_adt_2):
             sum_2 = ne_adt_2 + sw_adt_2
             return max(sum_1, sum_2)
         return sum_1
-    return -1
+    return 0
 
 def calc_sf_points(special_facilities, width_factor):
     sr_points = 26 if special_facilities[0] else 0

@@ -115,3 +115,5 @@ check_proximity(speed_humps_fc, [police_fc, fire_fc, hospitals_fc], pfh_radius, 
 check_proximity(speed_humps_fc, schools_fc, school_radius, "SR", [school_addr_field, school_id_field])
 check_proximity(speed_humps_fc, parks_fc, park_radius, "Park", [park_addr_field, park_id_field])
 check_proximity(speed_humps_fc, bikeways_fc, bdr_radius, "BR", [bike_addr_field, bike_id_field])
+
+arcpy.DeleteField_management(speed_humps_fc, ["NEAR_FID", "NEAR_DIST", "NEAR_FC"])

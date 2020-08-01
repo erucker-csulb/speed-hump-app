@@ -1,0 +1,52 @@
+﻿<ArcGIS defaultAssembly="EquationButtons.dll" defaultNamespace="EquationButtons" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
+  <AddInInfo id="{f7e1eca7-e74c-4f13-89c3-d2f6e117e39b}" version="1.0" desktopVersion="2.6.24783">
+    <Name>EquationButtons</Name>
+    <Description>EquationButtons description</Description>
+    <Image>Images\AddinDesktop32.png</Image>
+    <Author>Ethan</Author>
+    <Company>Acme</Company>
+    <Date>7/28/2020 10:08:12 PM</Date>
+    <Subject>Framework</Subject>
+    <!-- Note subject can be one or more of these topics:
+                    Content, Framework, Editing, Geodatabase, Geometry, Geoprocessing, Layouts, Map Authoring, Map Exploration -->
+  </AddInInfo>
+  <modules>
+    <insertModule id="EquationButtons_Module" className="Module1" autoLoad="false" caption="Module1">
+      <groups>
+        <group id="EquationButtons_Group1" caption="Analysis Equations" appearsOnAddInTab="true">
+          <button refID="EquationButtons_RunEq_AccHist" size="large" />
+          <buttonPalette refID="EquationButtons_EquationPalette" />
+        </group>
+      </groups>
+      <controls>
+        <button id="EquationButtons_RunEq_AccHist" caption="Accident History Flag" className="RunEq_AccHist" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonBlue32.png">
+          <tooltip heading="Set flag for accident history">Run a Python script to set proper accident history flag for each location.<disabledText /></tooltip>
+        </button>
+        <button id="EquationButtons_EquationPalette_Items_ButtonAccHist" caption="Accident History Flag" className="EquationPalette_buttonAccHist" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGrey16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGrey32.png">
+          <tooltip heading="Set flag for accident history">Run a Python script to set proper accident history flag for each location.<disabledText /></tooltip>
+        </button>
+        <button id="EquationButtons_EquationPalette_Items_ButtonPreScore" caption="Pre-Score" className="EquationPalette_buttonPreScore" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGrey16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGrey32.png">
+          <tooltip heading="Calculate pre-score rank">Run a Python script to calculate the pre-score rank for each location.<disabledText /></tooltip>
+        </button>
+        <button id="EquationButtons_EquationPalette_Items_ButtonCalcSpeed" caption="Calc 85th Speed" className="EquationPalette_buttonCalcSpeed" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGrey16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGrey32.png">
+          <tooltip heading="Calculate 85th percentile speed">Run a Python script to calculate the 85th percentile speed for each location.<disabledText /></tooltip>
+        </button>
+        <button id="EquationButtons_EquationPalette_Items_ButtonCalcADT" caption="Calc ADT" className="EquationPalette_buttonCalcADT" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGrey16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGrey32.png">
+          <tooltip heading="Calculate average daily traffic">Run a Python script to calculate the average daily traffic counts for each location.<disabledText /></tooltip>
+        </button>
+        <button id="EquationButtons_EquationPalette_Items_ButtonRankScore" caption="Rank Score" className="EquationPalette_buttonRankScore" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGrey16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonGrey32.png">
+          <tooltip heading="Calculate final rank score">Run a Python script to calculate the final rank score for each location.<disabledText /></tooltip>
+        </button>
+      </controls>
+      <palettes>
+        <buttonPalette id="EquationButtons_EquationPalette" caption="Equations" dropDown="true" menuStyle="false">
+          <button refID="EquationButtons_EquationPalette_Items_ButtonAccHist" />
+          <button refID="EquationButtons_EquationPalette_Items_ButtonPreScore" />
+          <button refID="EquationButtons_EquationPalette_Items_ButtonCalcSpeed" />
+          <button refID="EquationButtons_EquationPalette_Items_ButtonCalcADT" />
+          <button refID="EquationButtons_EquationPalette_Items_ButtonRankScore" />
+        </buttonPalette>
+      </palettes>
+    </insertModule>
+  </modules>
+</ArcGIS>

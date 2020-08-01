@@ -19,11 +19,23 @@ def pre_score(three_year, five_year, special_facilities, street_width, street_le
     return acc_factor + sf_factor + width_factor + length_factor + sw_factor + cd_factor
 
 def calc_speed(ne_speed_1, sw_speed_1, ne_speed_2, sw_speed_2):
+    count = 0
+    sum_speed = 0
     if ne_speed_1:
+        count += 1
+        sum_speed += ne_speed_1
+        if sw_speed_1:
+            count += 1
+            sum_speed += sw_speed_1
         if ne_speed_2:
-            return (ne_speed_1 + sw_speed_1 + ne_speed_2 + sw_speed_2) / 4
-        return (ne_speed_1 + sw_speed_1) / 2
-    return -1 
+            count += 1
+            sum_speed += ne_speed_2
+            if sw_speed_2:
+                count += 1
+                sum_speed += sw_speed_2
+            return sum_speed / count
+        return sum_speed / count
+    return 0
 
 def calc_adt(ne_adt_1, sw_adt_1, ne_adt_2, sw_adt_2):
     if ne_adt_1:
@@ -32,7 +44,7 @@ def calc_adt(ne_adt_1, sw_adt_1, ne_adt_2, sw_adt_2):
             sum_2 = ne_adt_2 + sw_adt_2
             return max(sum_1, sum_2)
         return sum_1
-    return -1
+    return 0
 
 def calc_sf_points(special_facilities, width_factor):
     sr_points = 26 if special_facilities[0] else 0
@@ -58,3 +70,4 @@ def rank_score(speed_limit, speed_calc, adt_calc, ksi, three_year, five_year, sw
     print("CO: ", da_points)
     tot_other = acc_points + swcd_points + da_points
     return sl_check * speed_check * adt_check * (speed_points + adt_points + tot_other)
+    

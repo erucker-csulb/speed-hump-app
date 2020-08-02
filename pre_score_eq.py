@@ -1,7 +1,7 @@
 import arcpy
 
-arcpy.env.workspace = r"D:\CSULB\SpeedHumps\SpeedHump.gdb"
-fc = r"SpeedHumpEmpty\SpeedHumpEmpty"
+arcpy.env.workspace = arcpy.GetParameterAsText(0)
+fc = r"SpeedHump/SpeedHumpAnalysis"
 edit = arcpy.da.Editor(arcpy.env.workspace)
 
 def pre_score(three_year, five_year, special_facilities, street_width, street_length, sidewalk, cd_priority):

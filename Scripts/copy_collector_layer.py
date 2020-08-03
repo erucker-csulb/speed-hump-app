@@ -1,13 +1,13 @@
 """
- Tool Name:   CopySurveyLayer
- Source Name: copy_survey_layer.py
+ Tool Name:   CopyCollectorLayer
+ Source Name: copy_collector_layer.py
  Author:      Ethan Rucker
  Required Arguments:
               The path to the Geodatabase Workspace
  Description: 
-              Copies the Survey123 feature layer from ArcGIS Online to the Geodatabase.
+              Copies the Collector feature layer from ArcGIS Online to the Geodatabase.
               Deletes previous data from SpeedHumpAnalysis feature class and appends the
-              survey data to the empty feature class. The copy of the survey layer is 
+              collector data to the empty feature class. The copy of the survey layer is 
               then deleted.
 """
 
@@ -18,7 +18,7 @@ from arcgis.features import FeatureLayer
 """ Local Variables """
 
 url_gis = r"https://ladot.maps.arcgis.com"                                                                              # URL to AGOL or Portal
-url_fl = r"https://services3.arcgis.com/vq5vGR4r1YX7ueLg/arcgis/rest/services/SpeedHump_Survey123/FeatureServer/0"      # URL for feature layer to download as feature class
+url_fl = r"https://services3.arcgis.com/vq5vGR4r1YX7ueLg/arcgis/rest/services/Speed_Hump_Layer/FeatureServer/0"      # URL for feature layer to download as feature class
 user = arcpy.GetParameterAsText(1)                                                                                      # AGOL or Portal username
 pwd = arcpy.GetParameterAsText(2)                                                                                       # user password
 arcpy.env.workspace = arcpy.GetParameterAsText(0)                                                                       # path to file geodatabase

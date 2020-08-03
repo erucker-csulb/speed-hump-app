@@ -17,7 +17,7 @@
               For schools, parks, and bike routes, also checks for direct access.
 """
 
-import arcpy
+import arcpy, sys
 
 """ Common Variables """
 

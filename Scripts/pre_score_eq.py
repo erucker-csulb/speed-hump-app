@@ -10,7 +10,7 @@
               sidewalks, and priority from council district.
 """
 
-import arcpy
+import arcpy, sys
 
 arcpy.env.workspace = arcpy.GetParameterAsText(0)
 edit = arcpy.da.Editor(arcpy.env.workspace)

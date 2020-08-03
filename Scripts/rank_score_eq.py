@@ -15,7 +15,7 @@
                   Calc ADT - 1000 > 0
 """
 
-import arcpy
+import arcpy, sys
 
 arcpy.env.workspace = arcpy.GetParameterAsText(0)
 fc = r"SpeedHump\SpeedHumpAnalysis"

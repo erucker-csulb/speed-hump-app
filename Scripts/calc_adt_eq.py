@@ -10,7 +10,7 @@
               up to two separate field surveys.
 """
 
-import arcpy
+import arcpy, sys
 
 arcpy.env.workspace = arcpy.GetParameterAsText(0)
 edit = arcpy.da.Editor(arcpy.env.workspace)

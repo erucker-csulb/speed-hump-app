@@ -11,7 +11,7 @@
                         Grading is higher than 7%
 """
 
-import arcpy
+import arcpy, sys
 
 arcpy.env.workspace = arcpy.GetParameterAsText(0)
 fc = r"SpeedHump\SpeedHumpAnalysis"

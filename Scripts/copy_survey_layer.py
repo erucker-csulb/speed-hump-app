@@ -19,8 +19,8 @@ from arcgis.features import FeatureLayer
 
 url_gis = r"https://ladot.maps.arcgis.com"                                                                              # URL to AGOL or Portal
 url_fl = r"https://services3.arcgis.com/vq5vGR4r1YX7ueLg/arcgis/rest/services/SpeedHump_Survey123/FeatureServer/0"      # URL for feature layer to download as feature class
-user = "lan.nguyen_ladot"                                                                                               # AGOL or Portal username
-pwd = "william.ha2020"                                                                                                  # user password
+user = arcpy.GetParameterAsText(1)                                                                                               # AGOL or Portal username
+pwd = arcpy.GetParameterAsText(2)                                                                                                  # user password
 arcpy.env.workspace = arcpy.GetParameterAsText(0)                                                                       # path to file geodatabase
 fc_copy = r"SpeedHumpCopy"                                                                                              # name of copied feature class
 fc = r"SpeedHump\SpeedHumpAnalysis"                                                                                     # name of main speed hump feature class

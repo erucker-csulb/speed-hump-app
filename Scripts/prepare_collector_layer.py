@@ -15,9 +15,9 @@ import arcpy, sys
 
 """ Local Variables """
 
-arcpy.env.workspace = arcpy.GetParameterAsText(0)                                                                       # path to file geodatabase
-fc_from = r"SpeedHump\SpeedHumpAnalysis"                                                                                              # name of copied feature class
-fc_to = r"SpeedHump\SpeedHump_Collector"                                                                                     # name of main speed hump feature class
+arcpy.env.workspace = arcpy.GetParameterAsText(0)                            # path to file geodatabase
+fc_from = r"SpeedHump\SpeedHumpAnalysis"                                     # name of copied feature class
+fc_to = r"SpeedHump\SpeedHump_Collector"                                     # name of main speed hump feature class
 
 try:
     """ Replace Features in Feature Class and Delete Copy """

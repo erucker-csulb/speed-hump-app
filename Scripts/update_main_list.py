@@ -18,7 +18,7 @@ fc_from = r"SpeedHump\SpeedHumpAnalysis"                                 # name 
 fc_to = r"SpeedHump\SpeedHump"                                           # name of main speed hump feature class
 
 try:
-    """ Replace Features in Feature Class and Delete Copy """
+    """ Append Analysis Features to Main Feature Class """
 
     arcpy.Append_management(fc_from, fc_to, "NO_TEST")
     arcpy.AddMessage("SUCCESS")

@@ -7,8 +7,8 @@
  Description: 
               Copies the data from the Analysis feature class to the Collector feature 
               class in preparation to overwrite the Collector layer on ArcGIS Online.
-              Deletes previous data from SpeedHump_Collector feature class and appends 
-              the analysis data to the empty feature class.
+              Deletes previous data from the Collector feature class and appends 
+              the analysis data to the now empty feature class.
 """
 
 import arcpy, sys

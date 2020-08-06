@@ -18,7 +18,7 @@ from arcgis.features import FeatureLayer
 """ Local Variables """
 
 url_gis = r"https://ladot.maps.arcgis.com"                                                                              # URL to AGOL or Portal
-url_fl = r"https://services3.arcgis.com/vq5vGR4r1YX7ueLg/arcgis/rest/services/Speed_Hump_Layer/FeatureServer/0"      # URL for feature layer to download as feature class
+url_fl = r"https://services3.arcgis.com/vq5vGR4r1YX7ueLg/arcgis/rest/services/Speed_Hump_Layer/FeatureServer/0"         # URL for feature layer to download as feature class
 user = arcpy.GetParameterAsText(1)                                                                                      # AGOL or Portal username
 pwd = arcpy.GetParameterAsText(2)                                                                                       # user password
 arcpy.env.workspace = arcpy.GetParameterAsText(0)                                                                       # path to file geodatabase

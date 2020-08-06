@@ -20,10 +20,41 @@ import arcpy, sys
 arcpy.env.workspace = arcpy.GetParameterAsText(0)
 fc = r"SpeedHump\SpeedHumpAnalysis"
 edit = arcpy.da.Editor(arcpy.env.workspace)
+fields = ["SP", "FN_E_S", "FS_W_S", "SN_E_S", "SS_W_S", "FN_E_T", "FS_W_T", "SN_E_T", "SS_W_T", "KSI", "THYA", "FYA", "SW", "CDP", "DA", "SR", "BDR", "Park", "OSF", "SWI", "CL85", "CLADT", "RS", "ST"]
+expression = arcpy.AddFieldDelimiters(fc, fields[-1]) + " = 'Pending'"
+da_multiplier = float(arcpy.GetParameterAsText(1))
 
 def null_value_error(field):
     arcpy.AddError(field + " returned a NULL value.")
     sys.exit(1)
+
+def calc_speed(ne_speed_1, sw_speed_1, ne_speed_2, sw_speed_2):
+    count = 0
+    sum_speed = 0
+    if ne_speed_1 is not None:
+        count += 1
+        sum_speed += ne_speed_1
+        if sw_speed_1:
+            count += 1
+            sum_speed += sw_speed_1
+        if ne_speed_2:
+            count += 1
+            sum_speed += ne_speed_2
+            if sw_speed_2:
+                count += 1
+                sum_speed += sw_speed_2
+            return sum_speed / count
+        return sum_speed / count
+    return 0
+
+def calc_adt(ne_adt_1, sw_adt_1, ne_adt_2, sw_adt_2):
+    if ne_adt_1 is not None:
+        sum_1 = (ne_adt_1 + sw_adt_1) if sw_adt_1 else ne_adt_1
+        if ne_adt_2 is not None:
+            sum_2 = (ne_adt_2 + sw_adt_2) if sw_adt_2 else ne_adt_2
+            return max(sum_1, sum_2)
+        return sum_1
+    return 0
 
 def calc_sf_points(special_facilities, width_factor):
     sr_points = 26 if special_facilities[0] else 0
@@ -32,7 +63,7 @@ def calc_sf_points(special_facilities, width_factor):
     osf_points = 18 if special_facilities[3] else 0
     return sr_points + br_points + park_points + osf_points
 
-def rank_score(speed_limit, speed_calc, adt_calc, ksi, three_year, five_year, sidewalk, cd_priority, da, special_facilities, street_width):
+def rank_score(speed_limit, speed_calc, adt_calc, ksi, three_year, five_year, sidewalk, cd_priority, da, special_facilities, street_width, da_multiplier):
     if not speed_limit or speed_calc is None or adt_calc is None:
         null_value_error("Speed or Traffic")
     sl_check = 1 if speed_limit <= 30 else 0
@@ -62,13 +93,10 @@ def rank_score(speed_limit, speed_calc, adt_calc, ksi, three_year, five_year, si
             null_value_error("Special Facilities")
         sf_int.append(1 if sf == "Yes" else 0)
     sf_points = calc_sf_points(sf_int, width_factor)
-    da_points = 30 if da == "Yes" else sf_points
+    da_points = (sf_points * da_multiplier) if da == "Yes" else sf_points
 
     tot_other = acc_points + swcd_points + da_points
     return sl_check * speed_check * adt_check * (speed_points + adt_points + tot_other)
-
-fields = ["SP", "CL85", "CLADT", "KSI", "THYA", "FYA", "SW", "CDP", "DA", "SR", "BDR", "Park", "OSF", "SWI", "RS", "ST"]
-expression = arcpy.AddFieldDelimiters(fc, fields[-1]) + " = 'Pending'"
 
 try:
 
@@ -77,8 +105,10 @@ try:
 
     with arcpy.da.UpdateCursor(fc, fields, expression) as cursor:
         for row in cursor:
-            row[14] = float(rank_score(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9:13], row[13]))
-            arcpy.AddMessage(row[14])
+            row[20] = float(calc_speed(row[1], row[2], row[3], row[4]))
+            row[21] = calc_adt(row[5], row[6], row[7], row[8])
+            row[22] = float(rank_score(row[0], row[20], row[21], row[9], row[10], row[11], row[12], row[13], row[14], row[15:19], row[19], da_multiplier))
+            arcpy.AddMessage(row[22])
             cursor.updateRow(row)
 
     edit.stopOperation()

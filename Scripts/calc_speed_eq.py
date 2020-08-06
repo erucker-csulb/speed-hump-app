@@ -15,7 +15,7 @@ import arcpy, sys
 arcpy.env.workspace = arcpy.GetParameterAsText(0)
 edit = arcpy.da.Editor(arcpy.env.workspace)
 fc = r"SpeedHump\SpeedHumpAnalysis"
-fields = ["FN_E_S", "FS_W_S", "SN_E_S", "SS_W_S", "CL85", "ST"]
+fields = ["FN_E_S", "FS_W_S", "SN_E_S", "SS_W_S", "CL85"]
 
 def calc_speed(ne_speed_1, sw_speed_1, ne_speed_2, sw_speed_2):
     count = 0
